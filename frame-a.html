@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Content Security Policy (CSP): a TRAINING setup that breaks Pendo
+       guides and the Designer on purpose, while everything else still works.
+       Allowed:
+         - this site's own files, inline scripts and inline styles
+         - the Pendo agent (cdn.pendo.io) and sending analytics (data.pendo.io)
+         - Session Replay's web worker (blob:) and the YouTube embed
+       Left out on purpose (see Pendo's CSP help article):
+         - guide content: content-<SUB_ID>.static.pendo.io and
+           pendo-static-<SUB_ID>.storage.googleapis.com
+         - the Designer / Visual Design Studio: app.pendo.io
+       So page loads are clean, but CSP errors appear in the console when a
+       guide tries to show or someone launches the Designer. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.pendo.io; style-src 'self' 'unsafe-inline'; connect-src 'self' https://data.pendo.io; img-src 'self' data: https://data.pendo.io; font-src 'self'; frame-src 'self' https://www.youtube.com; worker-src 'self' blob:">
+  <title>Frame A</title>
+
+  <!-- This file is shown INSIDE an iframe on frames.html.
+       It needs its own copy of the styles, theme and Pendo scripts. -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/theme.js"></script>
+  <script src="assets/js/session.js"></script>
+  <script src="assets/js/pendo-snippet.js"></script>
+</head>
+<body class="frame-body">
+  <h3>I'm in Frame A</h3>
+  <button class="btn" id="frame-a-primary">Clicky</button>
+  <button class="btn btn-outline" id="frame-a-secondary">Clicky too</button>
+</body>
+</html>
