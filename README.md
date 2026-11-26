@@ -16,6 +16,20 @@ Then visit <http://localhost:8000>.
 
 Edit `assets/js/config.js` and replace `YOUR-PENDO-API-KEY`. Until you do, Pendo does not load (the site still works, and the login page shows a reminder). The domain you host the site on also needs to be allowed in your Pendo subscription.
 
+## Test logins
+
+Only these 5 fake users can log in. They're defined in `assets/js/session.js` (edit the `USERS` list there to change them). Each has a fixed account, role and plan that are sent to Pendo.
+
+| Email (visitor ID) | Password | Account | Role | Plan |
+| --- | --- | --- | --- | --- |
+| ana@example.com | password1 | acme-corp | admin | enterprise |
+| ben@example.com | password2 | acme-corp | learner | enterprise |
+| cara@example.com | password3 | globex | manager | pro |
+| dev@example.com | password4 | globex | learner | pro |
+| eli@example.com | password5 | initech | learner | free |
+
+This only pretends to need credentials: the passwords are in plain text in the site's JavaScript. The Activity Simulator's "Generate fake visitors" mode and the `automation/` runner still try to log in as made-up `sim-...` visitors, so they no longer work.
+
 ## What's where
 
 | File | What it does |
@@ -25,7 +39,7 @@ Edit `assets/js/config.js` and replace `YOUR-PENDO-API-KEY`. Until you do, Pendo
 | `assets/css/style.css` | All styling, including light and dark colors |
 | `assets/js/config.js` | Settings: Pendo key, site name |
 | `assets/js/theme.js` | Light/dark toggle |
-| `assets/js/session.js` | Fake login: saves the user in localStorage |
+| `assets/js/session.js` | Fake login: the 5 allowed test users, and saves the logged-in user in localStorage |
 | `assets/js/pendo-snippet.js` | Installs Pendo and identifies the saved user |
 | `assets/js/layout.js` | Builds the left nav and top banner on every page |
 | `assets/js/app.js` | Page switching (by URL `#`) and the login form |

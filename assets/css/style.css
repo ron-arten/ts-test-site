@@ -309,6 +309,8 @@ summary { cursor: pointer; font-weight: 600; }
 /* Login page */
 .login-box { max-width: 460px; margin: 1rem auto; }
 /* overflow-wrap: anywhere lets the long JSON line break inside the box */
+/* Wrong email or password message on the login page */
+.login-error { color: var(--danger); font-size: .9rem; margin: 0 0 .75rem; }
 .session-box { background: var(--accent-soft); border-radius: 10px; padding: .8rem 1rem; margin-top: 1rem; font-size: .9rem; overflow-wrap: anywhere; }
 
 /* Dropdown that opens on hover (a "disappearing element" for tagging practice) */

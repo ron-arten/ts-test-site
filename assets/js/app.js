@@ -63,13 +63,15 @@
   form.addEventListener('submit', function (event) {
     event.preventDefault();     // stop the browser from reloading the page
 
-    // Read the four form fields and save them as the session.
-    window.Session.save({
-      username: document.getElementById('login-username').value.trim(),
-      account:  document.getElementById('login-account').value.trim(),
-      role:     document.getElementById('login-role').value,
-      plan:     document.getElementById('login-plan').value
-    });
+    var username = document.getElementById('login-username').value;
+    var password = document.getElementById('login-password').value;
+
+    // Session.login() only lets in the test users listed in session.js.
+    // Wrong email or password? Show the error and stay on the login page.
+    if (!window.Session.login(username, password)) {
+      document.getElementById('login-error').classList.remove('hidden');
+      return;
+    }
 
     // Reload (rather than just changing the page) so the banner, nav and
     // pendo.initialize() all pick up the new user.
@@ -77,14 +79,12 @@
     location.reload();
   });
 
-  // Fill the form with the saved values (handy for "switching" users).
+  // Fill in the email of whoever is logged in (handy for "switching" users).
+  // The password is never saved, so it always starts empty.
   function prefillForm() {
     var user = window.Session.get();
     if (!user) return;
     document.getElementById('login-username').value = user.username || '';
-    document.getElementById('login-account').value  = user.account  || '';
-    document.getElementById('login-role').value     = user.role     || 'learner';
-    document.getElementById('login-plan').value     = user.plan     || 'free';
   }
 
   // Show what is currently saved in localStorage, on the login page.

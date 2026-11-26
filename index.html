@@ -61,33 +61,19 @@
           
           <div class="card">
             <h3 class="page-title">Login</h3>
-            <p class="page-sub">Enter any details you like. Your visitor information is saved to your local storage and persists across pages. Using "log out" clears that storage and returns you to anonymous.</p>
+            <p class="page-sub">Log in with one of the site's test users (they're listed in <code>assets/js/session.js</code>). Each user has a fixed account, role and plan that are sent to Pendo. Your login is saved to local storage and persists across pages. Using "log out" clears that storage and returns you to anonymous.</p>
 
             <form id="login-form">
               <div class="field">
-                <label for="login-username">Username (visitor ID)</label>
-                <input type="text" id="login-username" required placeholder="e.g. jane.doe@example.com">
+                <label for="login-username">Email (visitor ID)</label>
+                <input type="email" id="login-username" required autocomplete="username" placeholder="e.g. ana@example.com">
               </div>
               <div class="field">
-                <label for="login-account">Account (account ID)</label>
-                <input type="text" id="login-account" required placeholder="e.g. acme-corp">
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" required autocomplete="current-password">
               </div>
-              <div class="field">
-                <label for="login-role">Role (visitor metadata)</label>
-                <select id="login-role">
-                  <option value="learner">Learner</option>
-                  <option value="admin">Admin</option>
-                  <option value="manager">Manager</option>
-                </select>
-              </div>
-              <div class="field">
-                <label for="login-plan">Plan (account metadata)</label>
-                <select id="login-plan">
-                  <option value="free">Free</option>
-                  <option value="pro">Pro</option>
-                  <option value="enterprise">Enterprise</option>
-                </select>
-              </div>
+              <!-- Shown by app.js when the email or password is wrong -->
+              <p class="login-error hidden" id="login-error" role="alert">That email and password don't match a test user.</p>
               <button type="submit" class="btn" id="login-submit">Log in</button>
             </form>
 
